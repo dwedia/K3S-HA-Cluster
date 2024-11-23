@@ -1,0 +1,16 @@
+---
+networks:
+  kubecontrol:
+    external: false
+
+services:
+  kubecontroller:
+    container_name: kubecontroller
+    image: localhost/kubecontroller
+    restart: unless-stopped
+    volumes:
+      - ./ssh:/root/.ssh:Z
+      - ./inventory:/root/inventory:Z
+      - ./servicesOnKube:/root/servicesOnKube:Z
+    networks:
+      - kubecontrol
